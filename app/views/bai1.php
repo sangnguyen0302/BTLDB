@@ -15,9 +15,11 @@ if ($con->connect_error) {
 <title>Bài 1</title>
 </head>
 <body>
-
-    <!-- NÚT -->
-    <a href="home.php" class="buttonn2">Home</a>
+<?php
+    if(isset($_SESSION['user_id'])){
+    ?>
+        <!-- NÚT -->
+    
     <form action="../controllers/bai1/bai1script.php" method="get">
         <input type="submit" name="view-db" value="View account table" class="buttonn"/>
     </form>
@@ -178,8 +180,122 @@ if ($con->connect_error) {
             } else { echo "0 results"; }
             $con->close();
     ?>
-    
     </div>
-
+    <div>
+   <p>Bài 2</p>
+   <div>
+    <form action="" method="get">
+    Display all account have service:
+				<select name="service" required>
+					<option value="NM">NORMAL</option>
+					<option value="DIS">DISCOUNT</option>
+					<option value="EXPRESS">EXPRESS</option>
+				</select>
+                <input type="submit" value="view" name="view_service"/>
+    </form>
+   </div>
+   <?php
+   //b xem danh sách service --------------------------------------------------->--------------------------------------------------
+    if(isset($_GET['view_service'])){
+    $service = $_GET['service'];
+    $sql = "";
+    if($service=="NM"){
+        $sql ="...";
+    }else if($service=="DIS"){
+        $sql ="...";
+    }else{
+        $sql = "...";
+    }
+    $result=$con->query($sql);
+    if(mysqli_num_rows($result)>0){
+        while($row = $result->fetch_assoc()){
+            ?>
+            <table>
+                </td></tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Atype</th>
+                    <th>User name</th>
+                    <th>Password</th>
+                    <th>SSN</th>
+                </tr>
+            <?php
+        // output data of each row
+            echo "<tr><td>"; echo "</td><td>" . $row["ID"]. "</td><td>" . $row["ATYPE"] . "</td><td>"
+            . $row["UserName"]. "</td>"."<td>" . $row["PASS"]. "</td><td>" . $row["SSN"]. "</td>" ?>
+            </tr>
+            
+            <?php      
+            }
+            echo "</table>";
+    }else{
+        echo "None account have this ".$service." service";
+    }
+}
+    ?>
+    <div>
+    <form action="" method="get" >
+    Display all account have service:
+				<select name="service" required>
+					<option value="NM">NORMAL</option>
+					<option value="DIS">DISCOUNT</option>
+					<option value="EXPRESS">EXPRESS</option>
+				</select>
+                <input type="text" name="num_phone" placeholder="Input number of phone" required/>
+                <input type="submit" value="view" name="view_service"/>
+            
+    </form>
+   </div>
+   <?php
+    // xem danh sách service có số số điện thoại--------------------------------------------------->---------------------------------
+    if(isset($_GET['view_service'])){
+        $service = $_GET['service']; //tên dịch vụ  
+        $num_phone=$_GET['num_phone'];  // số số điện thoại
+        $sql = "";
+        if($service=="NM"){
+            $sql ="...";
+        }else if($service=="DIS"){
+            $sql ="...";
+        }else{
+            $sql = "...";
+        }
+        $result=$con->query($sql);
+        if(mysqli_num_rows($result)>0){
+            while($row = $result->fetch_assoc()){
+                ?>
+                <table>
+                    </td></tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Atype</th>
+                        <th>User name</th>
+                        <th>Password</th>
+                        <th>SSN</th>
+                    </tr>
+                <?php
+            // output data of each row
+                echo "<tr><td>"; echo "</td><td>" . $row["ID"]. "</td><td>" . $row["ATYPE"] . "</td><td>"
+                . $row["UserName"]. "</td>"."<td>" . $row["PASS"]. "</td><td>" . $row["SSN"]. "</td>" ?>
+                </tr>
+                <?php      
+                }
+                echo "</table>";
+        }else{
+            echo "None account have this ".$service." service";
+        }
+    }
+        ?>
+        <a href="../controllers/bai1/bai1script.php?logout=1" class="buttonn2">Log out</a>
+        <?php
+    }else{
+        ?>
+        <form action="../controllers/loginController.php" method= "post">
+        <input type="submit" name="Login" value="Log in">
+        <input type="submit" name="Regist" value="Sign up">
+        </form>
+        <?php
+    }
+        ?>
+    
 </body>
 </html>

@@ -10,6 +10,9 @@ require_once("inc/head.php");
     <?php
     if(isset($_SESSION['user_id'])){
         echo '<a href="bai1.php">Bài 1</a>';
+        ?>
+        <a href="../controllers/bai1/bai1script.php?logout=1" class="buttonn2">Log out</a>
+        <?php
     }else{
         ?>
         <form action="../controllers/loginController.php" method= "post">
@@ -18,8 +21,8 @@ require_once("inc/head.php");
         </form>
         <?php
     }
-    ?>
-    <a href="../controllers/bai1/bai1script.php?logout=1" class="buttonn2">Log out</a>
+        ?>
+    <
 
 
     <?php require_once("inc/footer.php"); ?>

@@ -37,7 +37,6 @@ if(isset($_POST['LoginAction'])){
 <title>Đăng nhập</title>
 </head>
 <body>
-<?php require dirname(__FILE__) . '/inc/header.php'; ?>
 <?php require dirname(__FILE__) . '/inc/nav.php'; ?>
 <div class="login"> 
 <div class="login-triangle"></div>
