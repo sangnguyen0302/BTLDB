@@ -22,12 +22,13 @@ if ($con->connect_error) {
         <input type="submit" name="view-db" value="View account table" class="buttonn"/>
     </form>
     <form action="../controllers/bai1/bai1script.php" method="get" >
-        <input type="submit" name="add-record" value="Add new record" class="buttonn"/>
+        <input type="submit" name="add-record" value="Add new account" class="buttonn"/>
     </form>
     <!-- // Nút xem account có uername -->
-    <form action="" method="get" >
-        <input type="text" name="view-user" placeholder="Input user name" required/>
-        <input type="submit" name="view-user-submit" value="view account have username"/>
+    <form action="" method="get">
+        <input type="submit" name="view-user-submit" value="View account have username" class="buttonn"/>
+        <input type="text" name="view-user" placeholder="Input user name" class="form" required />
+        </div>
     </form>
 
     <?php
@@ -38,7 +39,7 @@ if ($con->connect_error) {
             $sql ="EXEC VIEW_ACCOUNT_BY_username @username = '5763894824_EE@test.com'";
             $result = mysql_query($con, $sql);
             */
-            if(!$result){
+            if(!mysqli_num_rows($result)>0){
                 echo "Not existed";
             }else{
                 while($row = $result->fetch_assoc()){
@@ -67,29 +68,55 @@ if ($con->connect_error) {
     ?>
 
     <!-- Thêm record -->
+    <!--nút check ssn-->
     <?php
-        if(isset($_GET['add-record'])){
+        if(isset($_GET['add-record'])&&$_GET['add-record']==1){
+    ?>  <form action="../controllers/bai1/bai1script.php" method="get" class="login" >
+        Are you have SSN?<br>
+        <input type="text" name="check-ssn" placeholder="Input SSN to check" required/>
+        <input type="submit" name="check-ssn-submit" value="Check"/><br>
+        <a href="bai1.php?insert-person=1"?>Sign up SSN </a>
+        </form>
+    <?php 
+        }else if(isset($_GET['add-record'])){
             ?>
             <div class="add_new_record">
-                <h2>Add new record</h2>
+                <h2>Add new account</h2>
                 <form method="get" action="../controllers/bai1/bai1script.php" class="form">
-                <label for="name">New ID:</label><br>
-                <input type="text" id="add-id" name="add-id" value="" placeholder="Input ID exactly 10 digits"/><br>
-                <label for="add-atype">Atype(vị trí):</label><br>
-                <input type="text" id="add-atype" name="add-atype" value="" placeholder="Input role"/><br>
-                <label for="add-uname">User name: </label><br>
-                <input type="text" id="add-uname" name="add-uname" value=""/><br>
-                <label for="add-pass">Password:  </label><br>
-                <input type="password" id="add-pass" name="add-pass" value=""/><br>
-                <label for="add-ssn">SSN: </label><br>
-                <input type="text" id="add-ssn" name="add-ssn" value=""/><br>
+                <input type="hidden"  name="add-id" value=<?php echo $_GET['add-record']?> /><br>
+                Atype(vị trí):</label><br>
+                <input type="text"  name="add-atype" value="" placeholder="Input role"/><br>
+                User name: <br>
+                <input type="text"  name="add-uname" value=""/><br>
+                Password:  <br>
+                <input type="password"  name="add-pass" value=""/><br>
+                SSN: <br>
+                <input type="text"  name="add-ssn" value=""/><br>
                 <button type="submit" name="add_confirm">ADD</button>
                 </form>
                 <br>        
             </div>
             <?php
         }
-        
+        //form insert person
+        if(isset($_GET['insert-person'])){
+            ?>
+            <div class="login2">
+            <h2>Add new person</h2>
+                <form method="get" action="../controllers/bai1/bai1script.php" class="form">
+                SSN: <br>
+                <input type="text" name="add-ps-ssn" value="" placeholder="In put your SSN" required/><br>
+                First name: <br>
+                <input type="text" name="add-ps-fname" value="" placeholder="Input your first name" required/><br>
+                Last name: <br>
+                <input type="text" name="add-ps-lname" value="" placeholder="Input your last name" required/><br>
+                Gender: <br>
+                <input type="text"  name="add-gender" value="" placeholder="F or M" required/><br>
+            
+                <button type="submit" name="add_person_confirm">ADD</button>
+            </div>
+            <?php
+        }
         // Chỉnh sửa record
         if(isset($_GET['edit-record'])){
             $sql = "SELECT * FROM account WHERE ID=$id";

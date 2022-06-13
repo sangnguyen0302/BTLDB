@@ -58,6 +58,7 @@ h2{
     
 }
 .form{
+
     font-family: Comic Sans MS;
 }
 .form input {
@@ -78,5 +79,6 @@ input:focus {
   cursor: pointer;
 }
 .add_new_record{
-    border: 2px solid black;
+  padding: 20px;
+    border: 2px solid cornflowerblue;
 }
