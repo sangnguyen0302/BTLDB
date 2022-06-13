@@ -2,15 +2,28 @@
 <?php
 session_start();
 require_once "../../DB.php";
+$con = mysqli_connect("localhost","root","","driver_service");
+if ($con->connect_error) {
+    die("Connection failed: " . $con->connect_error);
+}
+
+    
 if(isset($_GET['view-db'])){
         $_SESSION['view-db']="view_db active";
         header("Location: ../../views/bai1.php");
         exit();
 }
+if(isset($_GET['logout'])){
+    unset($_GET['user_id']);
+    session_destroy();
+    header("Location: ../../views/bai1.php");
+    exit();
+}
 else {
     $_SESSION['view-db']="view_db";
 }
 if(isset($_GET['add-record'])){
+    
     header("Location: ../../views/bai1.php?add-record=1");
     exit();
 }
@@ -21,10 +34,6 @@ if(isset($_GET['edit_id'])){
 }
 if(isset($_GET['delete_id'])){
     $id=$_GET['delete_id'];
-    $con = mysqli_connect("localhost","root","","driver_service");
-        if ($con->connect_error) {
-            die("Connection failed: " . $con->connect_error);
-        }
         // sửa lại hàm ở đây......///
         $sql = " DELETE FROM account WHERE ID=$id";
         if ($con->query($sql)) {
@@ -34,6 +43,8 @@ if(isset($_GET['delete_id'])){
       } 
       header("Location: ../../views/bai1.php");
 }
+
+// Thêm 1 tài khoản
 if(isset($_GET['add_confirm']))
 {
     $id= $_GET['add-id'];
@@ -56,10 +67,6 @@ if(isset($_GET['add_confirm']))
         if(empty($ssn)) {
             array_push($errors, "required"); 
         }
-        $con = mysqli_connect("localhost","root","","driver_service");
-        if ($con->connect_error) {
-            die("Connection failed: " . $con->connect_error);
-        }
         // sửa lại hàm ở đây......///
         $sql = " INSERT INTO ACCOUNT VALUES('$id','$atype','$un','$pw','$ssn')";
         if ($con->query($sql)) {
@@ -69,6 +76,7 @@ if(isset($_GET['add_confirm']))
       } 
       header("Location: ../../views/bai1.php");
 }
+//Thay đổi thông tin
 if(isset($_GET['change_confirm']))
 {
     $id= $_GET['change-id'];
@@ -77,10 +85,6 @@ if(isset($_GET['change_confirm']))
     $un = $_GET['change-uname'];
     $pw = $_GET['change-pass'];
     $ssn = $_GET['change-ssn'];
-        $con = mysqli_connect("localhost","root","","driver_service");
-        if ($con->connect_error) {
-            die("Connection failed: " . $con->connect_error);
-        }
         // sửa lại hàm ở đây......///
         $sql = " UPDATE account SET ID='$id', UserName='$un', ATYPE='$atype', PASS='$pw', SSN='$ssn' WHERE ID=$old_id ";
         if ($con->query($sql)) {

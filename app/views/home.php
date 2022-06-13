@@ -19,7 +19,7 @@ require_once("inc/head.php");
         <?php
     }
     ?>
-
+    <a href="../controllers/bai1/bai1script.php?logout=1" class="buttonn2">Log out</a>
 
 
     <?php require_once("inc/footer.php"); ?>
