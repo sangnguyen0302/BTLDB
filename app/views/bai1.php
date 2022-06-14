@@ -129,16 +129,16 @@ if ($con->connect_error) {
             <div class="add_new_record">
                 <h2>Edit record </h2>
                 <form method="get" action="../controllers/bai1/bai1script.php" class="form">
-                <input type="hidden"  name="old-id" value="<?=$id?>" />
+                <input type="hidden"  name="user-name" value="<?=$value['UserName']?>" />
                 ID: 
                 <?php echo $value['ID']?><br>
+                SSN: <?php echo $value['SSN']?><br><br>
                 Atype(vị trí):<?php echo $value['ATYPE']?> <br>
-                User name: <br>
-                <input type="text"  name="change-uname" value="<?=$value['UserName']?>"/><br>
+                User name: <?php echo $value['UserName']?><br>
+                OLD Password: <br>
+                <input type="password"  name="old-pass" placeholder="Enter current password"/><br>
                 New Password: <br>
-                <input type="password"  name="change-pass" value="<?=$value['PASS']?>"/><br>
-                New SSN: <br>
-                <input type="text"  name="change-ssn" value="<?=$value['SSN']?>"/><br>
+                <input type="password"  name="change-pass" placeholder="Enter new password""/><br>
                 <button type="submit" name="change_confirm">Change</button>
                 </form>
                 <br>        

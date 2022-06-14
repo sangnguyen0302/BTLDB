@@ -107,12 +107,9 @@ if(isset($_GET['add_confirm']))
 //Thay đổi thông tin
 if(isset($_GET['change_confirm']))
 {
-    $id= $_GET['change-id'];
-    $old_id =$_GET['old-id'];
-    $atype= $_GET['change-atype'];
-    $un = $_GET['change-uname'];
-    $pw = $_GET['change-pass'];
-    $ssn = $_GET['change-ssn'];
+    $old_pass =$_GET['old-pass'];
+    $un = $_GET['user-name'];
+    $new_pw = $_GET['change-pass'];
         // sửa lại hàm ở đây......///
         $sql = " UPDATE account SET ID='$id', UserName='$un', ATYPE='$atype', PASS='$pw', SSN='$ssn' WHERE ID=$old_id ";
         if ($con->query($sql)) {
