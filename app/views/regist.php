@@ -1,5 +1,5 @@
 
-<?php   '/inc/head.php'; ?> 
+<?php   require 'inc/head.php'; ?> 
 <?php  require '../models/loginModel.php'; ?>
 <?php
 if(isset($_POST['RegisterAction']) && $_POST['RegisterAction']=="Đăng ký"){
@@ -28,8 +28,6 @@ if(isset($_POST['RegisterAction']) && $_POST['RegisterAction']=="Đăng ký"){
 <title>Đăng ký</title>
 </head>
 <body>
-    <?php  '/inc/header.php'; ?>
-    <?php  '/inc/nav.php'; ?>
     <div class="login">
         <div class="login-triangle"></div>
         <h2 class="login-header">Đăng ký</h2>
@@ -50,11 +48,10 @@ if(isset($_POST['RegisterAction']) && $_POST['RegisterAction']=="Đăng ký"){
       <p><input type="password" placeholder="Nhập lại mật khẩu" name="repassword" required oninput="check(this)"></p>
       <p><input type="submit" name="RegisterAction" value="Đăng ký"></p>
 </form>
+    Đã có tài khoản? <a href="login.php">Đăng nhập ngay</a>
     </div>
 
-    <div class="footer">
-        this is footer
-    </div>
+    
     <script language='javascript' type='text/javascript'>
       function check(input) {
             if (input.value != document.getElementById('password').value) {

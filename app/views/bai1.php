@@ -121,6 +121,7 @@ if ($con->connect_error) {
         }
         // Chỉnh sửa record
         if(isset($_GET['edit-record'])){
+            $id = $_GET['edit-record'];
             $sql = "SELECT * FROM account WHERE ID=$id";
             $result = mysqli_query($con, $sql);
             $value = $result->fetch_assoc(); 
@@ -131,7 +132,7 @@ if ($con->connect_error) {
                 <input type="hidden"  name="old-id" value="<?=$id?>" />
                 ID: 
                 <?php echo $value['ID']?><br>
-                Atype(vị trí):<?echo $value['ATYPE']?> <br>
+                Atype(vị trí):<?php echo $value['ATYPE']?> <br>
                 User name: <br>
                 <input type="text"  name="change-uname" value="<?=$value['UserName']?>"/><br>
                 New Password: <br>
@@ -181,9 +182,6 @@ if ($con->connect_error) {
             $con->close();
     ?>
     </div>
-    <div>
-   <p>Bài 2</p>
-   <div>
     <form action="" method="get">
     Display all account have service:
 				<select name="service" required>

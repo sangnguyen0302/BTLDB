@@ -51,6 +51,7 @@ if(isset($_POST['LoginAction'])){
       <p><input type="password" placeholder="Mật khẩu" name="password" required></p>
       <p><input type="submit" name="LoginAction" value="Đăng nhập"></p>
 </form>
+      Chưa có tài khoản?<a href="regist.php">Đăng ký tài khoản</a>
 </div>
 <!-- <?php require dirname(__FILE__) . '/inc/footer.php'; ?> -->
 </body>
