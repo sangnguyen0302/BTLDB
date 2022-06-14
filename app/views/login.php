@@ -3,7 +3,7 @@
     session_start();
     
     if (isset($_SESSION['user_id'])) {
-      header("Location: home.php");
+      header("Location: bai1.php");
     }
 ?>
 <?php
@@ -16,7 +16,7 @@ if(isset($_POST['LoginAction'])){
       if($result){
             $current_user = mysqli_fetch_assoc($result);
             $_SESSION['user_id'] = $current_user['ID'];
-            header("Location: home.php");
+            header("Location: bai1.php");
       }else{
              $result=adminCheckLogin($email,$password);
              if($result){
